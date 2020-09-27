@@ -1,0 +1,115 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TextRepository</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">nl.hr0152110.springcore.repository</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TextRepository (nl.hr0152110.springcore.repository)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TextRepository</td>
+<td class="coverageStat">
+  <span class="percent">
+    33,3%
+  </span>
+  <span class="absValue">
+    (1/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/ 5)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TextRepository$$EnhancerBySpringCGLIB$$3996f22e</td>
+  </tr>
+  <tr>
+    <td class="name">TextRepository$$EnhancerBySpringCGLIB$$965d3254</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    33,3%
+  </span>
+  <span class="absValue">
+    (1/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/ 5)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package nl.hr0152110.springcore.repository;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import org.springframework.stereotype.Repository;
+<i>4</i>&nbsp;import java.util.Map;
+<i>5</i>&nbsp;import java.util.HashMap;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;@Repository
+<b class="fc"><i>8</i>&nbsp;public class TextRepository {</b>
+<i>9</i>&nbsp;
+<b class="fc"><i>10</i>&nbsp;    private Map&lt;String, Integer&gt; dictionary = new HashMap&lt;String, Integer&gt;();</b>
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;    public Integer findByKey(String text) {
+<b class="nc"><i>13</i>&nbsp;        return dictionary.get(text);</b>
+<i>14</i>&nbsp;    }
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    public void save(String text, Integer count) {
+<b class="nc"><i>17</i>&nbsp;        dictionary.put(text, count);</b>
+<b class="nc"><i>18</i>&nbsp;    }</b>
+<i>19</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-09-27 18:09</div>
+</div>
+</body>
+</html>

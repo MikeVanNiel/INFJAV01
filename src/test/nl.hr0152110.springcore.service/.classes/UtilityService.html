@@ -1,0 +1,134 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: UtilityService</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">nl.hr0152110.springcore.service</a> ]
+</div>
+
+<h1>Coverage Summary for Class: UtilityService (nl.hr0152110.springcore.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UtilityService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (1/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    11,1%
+  </span>
+  <span class="absValue">
+    (2/ 18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package nl.hr0152110.springcore.service;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import nl.hr0152110.springcore.repository.TextRepository;
+<i>4</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>5</i>&nbsp;import org.springframework.beans.factory.annotation.Value;
+<i>6</i>&nbsp;import org.springframework.stereotype.Service;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;@Service
+<b class="fc"><i>10</i>&nbsp;public class UtilityService {</b>
+<i>11</i>&nbsp;
+<b class="fc"><i>12</i>&nbsp;    @Autowired</b>
+<i>13</i>&nbsp;    private TextRepository repository = new TextRepository();
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    public String getWordReversed(String word) {
+<b class="nc"><i>16</i>&nbsp;        String returnValue = &quot;&quot;;</b>
+<i>17</i>&nbsp;
+<b class="nc"><i>18</i>&nbsp;        if (word != null) {</b>
+<b class="nc"><i>19</i>&nbsp;            for (int i = word.length() - 1; i &gt;= 0; i--) {</b>
+<b class="nc"><i>20</i>&nbsp;                returnValue += word.charAt(i);</b>
+<i>21</i>&nbsp;            }
+<i>22</i>&nbsp;        }
+<i>23</i>&nbsp;
+<b class="nc"><i>24</i>&nbsp;        return returnValue;</b>
+<i>25</i>&nbsp;    }
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    public String getWordInCaps(String word) {
+<b class="nc"><i>28</i>&nbsp;        String returnValue = &quot;&quot;;</b>
+<i>29</i>&nbsp;
+<b class="nc"><i>30</i>&nbsp;        if (word != null) {</b>
+<b class="nc"><i>31</i>&nbsp;            returnValue = word.toUpperCase();</b>
+<i>32</i>&nbsp;        }
+<i>33</i>&nbsp;
+<b class="nc"><i>34</i>&nbsp;        return returnValue;</b>
+<i>35</i>&nbsp;    }
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    public String getWordCount(String text) {
+<b class="nc"><i>38</i>&nbsp;        Integer count = 0;</b>
+<i>39</i>&nbsp;
+<b class="nc"><i>40</i>&nbsp;        if (text != null) {</b>
+<b class="nc"><i>41</i>&nbsp;            count = this.repository.findByKey(text);</b>
+<i>42</i>&nbsp;
+<b class="nc"><i>43</i>&nbsp;            if (count == null || count == 0) {</b>
+<b class="nc"><i>44</i>&nbsp;                count = text.split(&quot; &quot;).length;</b>
+<b class="nc"><i>45</i>&nbsp;                this.repository.save(text, count);</b>
+<i>46</i>&nbsp;            }
+<i>47</i>&nbsp;        }
+<i>48</i>&nbsp;
+<b class="nc"><i>49</i>&nbsp;        return count.toString();</b>
+<i>50</i>&nbsp;    }
+<i>51</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-09-27 18:09</div>
+</div>
+</body>
+</html>
