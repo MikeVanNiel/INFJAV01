@@ -2,15 +2,18 @@ package nl.hr0152110.springcore.service;
 
 import nl.hr0152110.springcore.repository.TextRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 
 @Service
 public class UtilityService {
 
+    private final TextRepository repository;
+
     @Autowired
-    private TextRepository repository = new TextRepository();
+    public UtilityService(TextRepository textRepository) {
+        this.repository = textRepository;
+    }
 
     public String getWordReversed(String word) {
         String returnValue = "";

@@ -7,7 +7,7 @@ import java.util.HashMap;
 @Repository
 public class TextRepository {
 
-    private Map<String, Integer> dictionary = new HashMap<String, Integer>();
+    private final Map<String, Integer> dictionary = new HashMap<String, Integer>();
 
     public Integer findByKey(String text) {
         return dictionary.get(text);

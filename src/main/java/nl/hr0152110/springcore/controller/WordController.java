@@ -13,8 +13,12 @@ public class WordController {
     @Value("${reverse_action}")
     private String reverseAction;
 
+    private final UtilityService utilService;
+
     @Autowired
-    private UtilityService utilService;
+    public WordController(UtilityService utilService) {
+        this.utilService = utilService;
+    }
 
     @RequestMapping("/")
     public String getHome() {
