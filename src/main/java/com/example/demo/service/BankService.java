@@ -5,6 +5,7 @@ import com.example.demo.model.Rekening;
 import com.example.demo.model.Rekeninghouder;
 import com.example.demo.repository.RekeningRepository;
 import com.example.demo.repository.RekeninghouderRepository;
+import com.example.demo.repository.RepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +15,8 @@ import java.util.Optional;
 @Service
 public class BankService {
 
-    private final RekeningRepository rekeningRepo;
-    private final RekeninghouderRepository rekeninghouderRepo;
+    private final RepositoryInterface<Rekening> rekeningRepo;
+    private final RepositoryInterface<Rekeninghouder> rekeninghouderRepo;
 
 
     @Autowired
