@@ -3,7 +3,8 @@ package com.example.demo.service;
 
 import com.example.demo.model.Rekening;
 import com.example.demo.model.Rekeninghouder;
-import com.example.demo.repository.BankRepository;
+import com.example.demo.repository.RekeningRepository;
+import com.example.demo.repository.RekeninghouderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,38 +14,45 @@ import java.util.Optional;
 @Service
 public class BankService {
 
-    private final BankRepository bankRepo;
+    private final RekeningRepository rekeningRepo;
+    private final RekeninghouderRepository rekeninghouderRepo;
+
 
     @Autowired
-    public BankService(BankRepository repository) {
-        this.bankRepo = repository;
+    public BankService(RekeningRepository rekeningRepo, RekeninghouderRepository rekeninghouderRepo) {
+        this.rekeningRepo = rekeningRepo;
+        this.rekeninghouderRepo = rekeninghouderRepo;
     }
 
+
     public List<Rekening> allRekeningen() {
-        return bankRepo.allRekeningen();
+        return rekeningRepo.findAll();
     }
 
     public Rekening addRekening(Rekening rekening) {
-        return bankRepo.saveRekening(rekening);
+        for (Rekeninghouder rekeningHouder : rekening.getRekeninghouders()) {
+            rekeninghouderRepo.save(rekeningHouder);
+        }
+        return rekeningRepo.save(rekening);
     }
 
     public Rekening blockRekeningById(Long id) {
-        Optional<Rekening> rekening = bankRepo.findRekeningById(id);
+        Optional<Rekening> rekening = rekeningRepo.findOne(id);
 
         if (rekening.isPresent()) {
             Rekening rek = rekening.get();
             rek.setGeblokkeerd(true);
-            bankRepo.saveRekening(rek);
-            return rek;
+            return rekeningRepo.save(rek);
         }
+
         return null;
     }
 
     public Optional<Rekening> deleteRekeningById(Long id) {
-        Optional<Rekening> rekening = bankRepo.findRekeningById(id);
+        Optional<Rekening> rekening = rekeningRepo.findOne(id);
 
         if (rekening.isPresent()) {
-            bankRepo.deleteRekening(rekening.get());
+            rekeningRepo.delete(rekening.get());
         }
 
         return rekening;
@@ -52,20 +60,22 @@ public class BankService {
 
 
     public List<Rekening> allRekeningenVanHouder(Long id) {
-        return bankRepo.findRekeningenVanHouderById(id);
+        return rekeninghouderRepo.findOne(id).get().getRekeningen();
     }
 
     public Rekeninghouder addRekeninghouder(Rekeninghouder rekeningHouder) {
-        return bankRepo.saveRekeninghouder(rekeningHouder);
+        for (Rekening rekening : rekeningHouder.getRekeningen()) {
+            rekeningRepo.save(rekening);
+        }
+        return rekeninghouderRepo.save(rekeningHouder);
     }
 
-    public boolean deleteRekeninghouderById(Long id) {
-        Optional<Rekeninghouder> rekeningHouder = bankRepo.findRekeninghouderById(id);
+    public void deleteRekeninghouderById(Long id) {
+        Optional<Rekeninghouder> rekeningHouder = rekeninghouderRepo.findOne(id);
 
         if (rekeningHouder.isPresent()) {
-            bankRepo.deleteRekeninghouder(rekeningHouder.get());
-            return true;
+            rekeninghouderRepo.delete(rekeningHouder.get());
         }
-        return false;
     }
+
 }

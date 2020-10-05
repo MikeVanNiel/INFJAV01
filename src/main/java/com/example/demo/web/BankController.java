@@ -38,8 +38,8 @@ public class BankController {
     }
 
     @PostMapping("/rekeningen")
-    public ResponseEntity<Rekening> addRekening(@Valid @ModelAttribute Rekening newRekening) {
-        return new ResponseEntity<Rekening>(this.bankService.addRekening(newRekening), HttpStatus.OK);
+    public ResponseEntity<Rekening> addRekening(@Valid @ModelAttribute Rekening rekening) {
+        return new ResponseEntity<Rekening>(this.bankService.addRekening(rekening), HttpStatus.OK);
     }
 
     @PutMapping("/rekeningen/{id}")
@@ -71,17 +71,4 @@ public class BankController {
         this.bankService.deleteRekeninghouderById(id);
     }
 
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
-    }
 }

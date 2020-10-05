@@ -1,7 +1,5 @@
 package com.example.demo.model;
 
-
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -11,13 +9,13 @@ public class Rekening {
     private Long id;
     @NotNull
     @Size(message = "Ongeldig IBAN-nummer", min = 18, max = 18)
-    private String IBAN;
+    private String iban;
     private Double saldo;
     private Boolean isGeblokkeerd;
-    private List<Rekeninghouder> Rekeninghouders;
+    private List<Rekeninghouder> rekeninghouders;
 
     public Rekening() {
-        this.Rekeninghouders = new ArrayList<Rekeninghouder>();
+        this.rekeninghouders = new ArrayList<Rekeninghouder>();
     }
 
     public Long getId() {
@@ -29,11 +27,11 @@ public class Rekening {
     }
 
     public String getIBAN() {
-        return IBAN;
+        return iban;
     }
 
-    public void setIBAN(String IBAN) {
-        this.IBAN = IBAN;
+    public void setIBAN(String iban) {
+        this.iban = iban;
     }
 
     public Double getSaldo() {
@@ -53,10 +51,10 @@ public class Rekening {
     }
 
     public List<Rekeninghouder> getRekeninghouders() {
-        return Rekeninghouders;
+        return rekeninghouders;
     }
 
     public void addRekeninghouder(Rekeninghouder rekeninghouder) {
-        Rekeninghouders.add(rekeninghouder);
+        rekeninghouders.add(rekeninghouder);
     }
 }
