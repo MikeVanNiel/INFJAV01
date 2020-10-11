@@ -5,7 +5,6 @@ import com.example.demo.model.Rekening;
 import com.example.demo.model.Rekeninghouder;
 import com.example.demo.repository.RekeningRepository;
 import com.example.demo.repository.RekeninghouderRepository;
-import com.example.demo.repository.RepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +14,8 @@ import java.util.Optional;
 @Service
 public class BankService {
 
-    private final RepositoryInterface<Rekening> rekeningRepo;
-    private final RepositoryInterface<Rekeninghouder> rekeninghouderRepo;
+    private final RekeningRepository rekeningRepo;
+    private final RekeninghouderRepository rekeninghouderRepo;
 
 
     @Autowired
@@ -26,7 +25,7 @@ public class BankService {
     }
 
 
-    public List<Rekening> allRekeningen() {
+    public Iterable<Rekening> allRekeningen() {
         return rekeningRepo.findAll();
     }
 
@@ -38,7 +37,7 @@ public class BankService {
     }
 
     public Rekening blockRekeningById(Long id) {
-        Optional<Rekening> rekening = rekeningRepo.findOne(id);
+        Optional<Rekening> rekening = rekeningRepo.findById(id);
 
         if (rekening.isPresent()) {
             Rekening rek = rekening.get();
@@ -50,7 +49,7 @@ public class BankService {
     }
 
     public Optional<Rekening> deleteRekeningById(Long id) {
-        Optional<Rekening> rekening = rekeningRepo.findOne(id);
+        Optional<Rekening> rekening = rekeningRepo.findById(id);
 
         if (rekening.isPresent()) {
             rekeningRepo.delete(rekening.get());
@@ -61,7 +60,7 @@ public class BankService {
 
 
     public List<Rekening> allRekeningenVanHouder(Long id) {
-        return rekeninghouderRepo.findOne(id).get().getRekeningen();
+        return rekeninghouderRepo.findById(id).get().getRekeningen();
     }
 
     public Rekeninghouder addRekeninghouder(Rekeninghouder rekeningHouder) {
@@ -72,7 +71,7 @@ public class BankService {
     }
 
     public void deleteRekeninghouderById(Long id) {
-        Optional<Rekeninghouder> rekeningHouder = rekeninghouderRepo.findOne(id);
+        Optional<Rekeninghouder> rekeningHouder = rekeninghouderRepo.findById(id);
 
         if (rekeningHouder.isPresent()) {
             rekeninghouderRepo.delete(rekeningHouder.get());

@@ -33,8 +33,8 @@ public class BankController {
     }
 
     @GetMapping("/rekeningen")
-    public ResponseEntity<List<Rekening>> getRekeningen() {
-        return new ResponseEntity<List<Rekening>>(this.bankService.allRekeningen(), HttpStatus.OK);
+    public ResponseEntity<Iterable<Rekening>> getRekeningen() {
+        return new ResponseEntity<Iterable<Rekening>>(this.bankService.allRekeningen(), HttpStatus.OK);
     }
 
     @PostMapping("/rekeningen")

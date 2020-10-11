@@ -2,28 +2,30 @@ package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Rekeninghouder {
-    private Long id;
+@Entity
+@AttributeOverride(name = "id", column = @Column(name = "rekeninghouder_id"))
+public class Rekeninghouder extends BaseEntity {
+
+    @Column(length = 50)
     private String firstName;
+
+    @Column(length = 50)
     private String lastName;
+
     @JsonIgnore
+    @ManyToMany(mappedBy = "rekeninghouders")
+    @ElementCollection(targetClass=Long.class)
     private List<Rekening> rekeningen;
+
 
     public Rekeninghouder() {
         this.rekeningen = new ArrayList<Rekening>();
     }
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
 
     public String getFirstName() {

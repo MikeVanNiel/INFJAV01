@@ -1,30 +1,40 @@
 package com.example.demo.model;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Rekening {
-    private Long id;
+@Entity
+@AttributeOverride(name = "id", column = @Column(name = "rekening_id"))
+public class Rekening extends BaseEntity {
+
+
+    @Column(length=20, nullable=false)
     @NotNull
     @Size(message = "Ongeldig IBAN-nummer", min = 18, max = 18)
     private String iban;
+
+    @Column
     private Double saldo;
+
+    @Column
     private Boolean isGeblokkeerd;
+
+    @ManyToMany
+    @JoinTable(
+            name = "rekening_rekeninghouder",
+            joinColumns = @JoinColumn(name = "rekening_id"),
+            inverseJoinColumns = @JoinColumn(name = "rekeninghouder_id"))
+    @ElementCollection(targetClass=Long.class)
     private List<Rekeninghouder> rekeninghouders;
+
 
     public Rekening() {
         this.rekeninghouders = new ArrayList<Rekeninghouder>();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getIBAN() {
         return iban;
@@ -34,6 +44,7 @@ public class Rekening {
         this.iban = iban;
     }
 
+
     public Double getSaldo() {
         return saldo;
     }
@@ -42,6 +53,7 @@ public class Rekening {
         this.saldo = saldo;
     }
 
+
     public Boolean getGeblokkeerd() {
         return isGeblokkeerd;
     }
@@ -49,6 +61,7 @@ public class Rekening {
     public void setGeblokkeerd(Boolean geblokkeerd) {
         isGeblokkeerd = geblokkeerd;
     }
+
 
     public List<Rekeninghouder> getRekeninghouders() {
         return rekeninghouders;
