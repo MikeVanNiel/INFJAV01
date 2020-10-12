@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@AttributeOverride(name = "id", column = @Column(name = "rekening_id"))
 public class Rekening extends BaseEntity {
 
 
@@ -24,9 +23,9 @@ public class Rekening extends BaseEntity {
 
     @ManyToMany
     @JoinTable(
-            name = "rekening_rekeninghouder",
-            joinColumns = @JoinColumn(name = "rekening_id"),
-            inverseJoinColumns = @JoinColumn(name = "rekeninghouder_id"))
+            name = "RekeningRekeninghouder",
+            joinColumns = @JoinColumn(name = "rekeningId"),
+            inverseJoinColumns = @JoinColumn(name = "rekeninghouderId"))
     @ElementCollection(targetClass=Long.class)
     private List<Rekeninghouder> rekeninghouders;
 
