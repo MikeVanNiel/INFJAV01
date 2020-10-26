@@ -1,11 +1,8 @@
 package com.hr.eenvijfdrielagen.web;
 
 import com.hr.eenvijfdrielagen.aop.LogExecutionTime;
-import com.hr.eenvijfdrielagen.aop.RequestHeaderDetector;
 import com.hr.eenvijfdrielagen.dto.CombiRekeningDto;
-import com.hr.eenvijfdrielagen.dto.RekeningDto;
 import com.hr.eenvijfdrielagen.model.CombiRekening;
-import com.hr.eenvijfdrielagen.model.Rekening;
 import com.hr.eenvijfdrielagen.service.CombiRekeningService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

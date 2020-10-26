@@ -4,54 +4,40 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Objects;
-import java.util.Optional;
+import java.lang.reflect.Method;
+import java.util.Enumeration;
+
 
 @Slf4j
 @Aspect
 @Component
 public class RequestHeaderDetectorAspect {
 
-    @Pointcut("@annotation(requestHeaderDetector)")
-    private boolean hasRequestHeader(RequestHeaderDetector requestHeaderDetector) {
-        HttpServletRequest request = currentRequest();
+    @Around("@annotation(requestHeaderDetector) && args(request)")
+    public void logExecutionTime(ProceedingJoinPoint joinPoint, HttpServletRequest request) throws Throwable {
 
-        if (Objects.isNull(request)) {
-            return false;
-        }
+        Enumeration headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String headerName = (String) headerNames.nextElement();
 
-        String[] headerNames = requestHeaderDetector.headerNames();
+            MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+            Method method = signature.getMethod();
+            RequestHeaderDetector myAnnotation = method.getAnnotation(RequestHeaderDetector.class);
+            String value = myAnnotation.value();
 
-        for (String headerName : headerNames) {
-            String value = request.getHeader(headerName);
             if (StringUtils.hasText(value)) {
-                log.info("De gevraagde header is aanwezig");
-                return true;
+                final long start = System.currentTimeMillis();
+                Object proceed = joinPoint.proceed();
+                final long executionTime = System.currentTimeMillis() - start;
+                log.trace(joinPoint.getSignature() + " executed in " + executionTime + "ms");
             }
         }
-        return false;
     }
 
-    @Around("hasRequestHeader()")
-    public void logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
-        final long start = System.currentTimeMillis();
-        Object proceed = joinPoint.proceed();
-        final long executionTime = System.currentTimeMillis() - start;
-        log.trace(joinPoint.getSignature() + " executed in " + executionTime + "ms");
-    }
-
-    private HttpServletRequest currentRequest() {
-        ServletRequestAttributes servletRequestAttributes =
-                (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        return Optional.ofNullable(servletRequestAttributes)
-                .map(ServletRequestAttributes::getRequest)
-                .orElse(null);
-    }
 }

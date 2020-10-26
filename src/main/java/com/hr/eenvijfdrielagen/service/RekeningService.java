@@ -22,31 +22,31 @@ public class RekeningService {
     }
 
     @Cacheable("rekeningen")
-    @RequestHeaderDetector(headerNames = {"X-Trace-Database-Time"})
+    @RequestHeaderDetector(value = "X-Trace-Database-Time")
     public List<Rekening> findAll() {
         return rekeningRepo.findAll();
     }
 
     @Cacheable("rekening")
-    @RequestHeaderDetector(headerNames = {"X-Trace-Database-Time"})
+    @RequestHeaderDetector(value = "X-Trace-Database-Time")
     public Rekening getRekening(Long id) {
         return rekeningRepo.getOne(id);
     }
 
     @CachePut(value = "rekeningen", key = "rekening.id")
-    @RequestHeaderDetector(headerNames = {"X-Trace-Database-Time"})
+    @RequestHeaderDetector(value = "X-Trace-Database-Time")
     public Rekening createRekening(Rekening rekening) {
         return rekeningRepo.save(rekening);
     }
 
     @CachePut(value = "rekeningen", key = "rekening.id")
-    @RequestHeaderDetector(headerNames = {"X-Trace-Database-Time"})
+    @RequestHeaderDetector(value = "X-Trace-Database-Time")
     public Rekening updateRekening(Rekening rekening) {
         return rekeningRepo.save(rekening);
     }
 
     @CacheEvict(value = "rekeningen", key = "rekening.id")
-    @RequestHeaderDetector(headerNames = {"X-Trace-Database-Time"})
+    @RequestHeaderDetector(value = "X-Trace-Database-Time")
     public void deleteRekening(Long id) {
         Rekening rekening = this.getRekening(id);
         rekeningRepo.delete(rekening);

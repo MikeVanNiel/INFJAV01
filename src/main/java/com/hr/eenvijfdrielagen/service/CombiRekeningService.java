@@ -1,7 +1,6 @@
 package com.hr.eenvijfdrielagen.service;
 
 import com.hr.eenvijfdrielagen.aop.RequestHeaderDetector;
-import com.hr.eenvijfdrielagen.model.Rekening;
 import com.hr.eenvijfdrielagen.model.CombiRekening;
 import com.hr.eenvijfdrielagen.repository.CombiRekeningRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,31 +21,31 @@ public class CombiRekeningService {
     }
 
     @Cacheable("combiRekeningen")
-    @RequestHeaderDetector(headerNames = {"X-Trace-Database-Time"})
+    @RequestHeaderDetector(value = "X-Trace-Database-Time")
     public List<CombiRekening> findAll() {
         return rekeningRepo.findAll();
     }
 
     @Cacheable("combiRekening")
-    @RequestHeaderDetector(headerNames = {"X-Trace-Database-Time"})
+    @RequestHeaderDetector(value = "X-Trace-Database-Time")
     public CombiRekening getRekening(Long id) {
         return rekeningRepo.getOne(id);
     }
 
     @CachePut(value = "combiRekeningen", key = "rekening.id")
-    @RequestHeaderDetector(headerNames = {"X-Trace-Database-Time"})
+    @RequestHeaderDetector(value = "X-Trace-Database-Time")
     public CombiRekening createRekening(CombiRekening rekening) {
         return rekeningRepo.save(rekening);
     }
 
     @CachePut(value = "combiRekeningen", key = "rekening.id")
-    @RequestHeaderDetector(headerNames = {"X-Trace-Database-Time"})
+    @RequestHeaderDetector(value = "X-Trace-Database-Time")
     public CombiRekening updateRekening(CombiRekening rekening) {
         return rekeningRepo.save(rekening);
     }
 
     @CacheEvict(value = "combiRekeningen", key = "rekening.id")
-    @RequestHeaderDetector(headerNames = {"X-Trace-Database-Time"})
+    @RequestHeaderDetector(value = "X-Trace-Database-Time")
     public void deleteRekening(Long id) {
         CombiRekening rekening = this.getRekening(id);
         rekeningRepo.delete(rekening);

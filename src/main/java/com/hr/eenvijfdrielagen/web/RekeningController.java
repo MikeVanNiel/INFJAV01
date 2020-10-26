@@ -1,7 +1,6 @@
 package com.hr.eenvijfdrielagen.web;
 
 import com.hr.eenvijfdrielagen.aop.LogExecutionTime;
-import com.hr.eenvijfdrielagen.aop.RequestHeaderDetector;
 import com.hr.eenvijfdrielagen.dto.RekeningDto;
 import com.hr.eenvijfdrielagen.model.Rekening;
 import com.hr.eenvijfdrielagen.service.RekeningService;
