@@ -7,6 +7,8 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,17 +21,21 @@ import java.util.Enumeration;
 @Component
 public class RequestHeaderDetectorAspect {
 
-    @Around("@annotation(requestHeaderDetector) && args(request)")
-    public void logExecutionTime(ProceedingJoinPoint joinPoint, HttpServletRequest request) throws Throwable {
+    @Around("@annotation(RequestHeaderDetector)")
+    public void logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
+                .currentRequestAttributes())
+                .getRequest();
 
         Enumeration headerNames = request.getHeaderNames();
+
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        Method method = signature.getMethod();
+        RequestHeaderDetector myAnnotation = method.getAnnotation(RequestHeaderDetector.class);
+        String value = myAnnotation.value();
+
         while (headerNames.hasMoreElements()) {
             String headerName = (String) headerNames.nextElement();
-
-            MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-            Method method = signature.getMethod();
-            RequestHeaderDetector myAnnotation = method.getAnnotation(RequestHeaderDetector.class);
-            String value = myAnnotation.value();
 
             if (StringUtils.hasText(value)) {
                 final long start = System.currentTimeMillis();
