@@ -1,5 +1,6 @@
 package com.hr.eenvijfdrielagen.web;
 
+import com.hr.eenvijfdrielagen.aop.LogExecutionTime;
 import com.hr.eenvijfdrielagen.dto.RekeningDto;
 import com.hr.eenvijfdrielagen.model.Rekening;
 import com.hr.eenvijfdrielagen.service.RekeningService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -27,6 +29,7 @@ public class RekeningController {
     }
 
     @GetMapping("/rekeningen")
+    @LogExecutionTime
     public ResponseEntity<List<RekeningDto>> get() {
         List<RekeningDto> rekeningDtos = rekeningService
                 .findAll()
@@ -37,18 +40,21 @@ public class RekeningController {
     }
 
     @PostMapping("/rekeningen")
-    public ResponseEntity<RekeningDto> addRekening(@RequestBody RekeningDto rekeningDto) throws ParseException {
+    @LogExecutionTime
+    public ResponseEntity<RekeningDto> addRekening(@Valid @RequestBody RekeningDto rekeningDto) throws ParseException {
         Rekening rekening = this.rekeningService.createRekening(convertToEntity(rekeningDto));
         return new ResponseEntity<RekeningDto>(convertToDto(rekening), HttpStatus.OK);
     }
 
     @PutMapping("/rekeningen/{id}")
-    public ResponseEntity<RekeningDto> updateRekening(@RequestBody RekeningDto rekeningDto) throws ParseException {
+    @LogExecutionTime
+    public ResponseEntity<RekeningDto> updateRekening(@Valid @RequestBody RekeningDto rekeningDto) throws ParseException {
         Rekening rekening = this.rekeningService.updateRekening(convertToEntity(rekeningDto));
         return new ResponseEntity<RekeningDto>(convertToDto(rekening), HttpStatus.OK);
     }
 
     @DeleteMapping("/rekeningen/{id}")
+    @LogExecutionTime
     public void deleteRekening(@PathVariable Long id) {
         rekeningService.deleteRekening(id);
     }
