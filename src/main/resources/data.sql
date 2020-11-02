@@ -1,2 +1,2 @@
-INSERT INTO gebruiker (naam, adres) VALUES ('Jan', 'Stationstraat 12, Zwolle');
-INSERT INTO gebruiker (naam, adres) VALUES ('Angela', 'Planetenweg 4, Berkel en Rodenrijs');
+INSERT INTO user (username, password, active, roles, address) VALUES ('Jan', 'Jan', true, 'USER', 'Stationstraat 12, Zwolle');
+INSERT INTO user (username, password, active, roles, address) VALUES ('Angela', 'Angela', true, 'ADMIN', 'Planetenweg 4, Berkel en Rodenrijs');

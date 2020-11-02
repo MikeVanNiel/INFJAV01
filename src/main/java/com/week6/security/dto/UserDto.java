@@ -5,15 +5,18 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Setter
 @Getter
-public class GebruikerDto {
+public class UserDto {
     private Long id;
 
     @NotNull
     @Size(min = 2)
-    private String naam;
+    private String username;
 
-    private String adres;
+    private String address;
+
+    private List<UserDto> friends;
 }

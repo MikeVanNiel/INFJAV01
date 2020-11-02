@@ -10,7 +10,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @SpringBootApplication
 public class SecurityApplication {
 
-	@Bean
+	/*@Bean
 	UserDetailsService userDetailsService() {
 		return new InMemoryUserDetailsManager(
 				User.withDefaultPasswordEncoder()
@@ -19,7 +19,7 @@ public class SecurityApplication {
 					.roles("USER")
 					.build()
 		);
-	}
+	}*/
 
 	public static void main(String[] args) {
 		SpringApplication.run(SecurityApplication.class, args);
