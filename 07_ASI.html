@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ASI</title>
+</head>
+<body>
+    <h1>Opdracht 7 - NIET AF!</h1>
+
+    <script>
+        /*
+        var foo = function foo(x) {
+
+            if (x > 4) {
+                throw
+                new Error('x > 4')
+            }
+
+            x
+                ++
+
+            x *= 100
+
+            return
+                Math.floor(x)
+        }
+        */
+
+        var fooMetPuntKommas = function foo(x) {
+
+            if (x > 4) {
+                throw new Error('x > 4');
+            }
+
+            x++;
+
+            x *= 100;
+
+            return Math.floor(x);
+        };
+
+
+        var fooZonderPuntKommas = function foo(x) {
+
+            if (x > 4) {
+                throw new Error('x > 4')
+            }
+
+            x++ 
+
+            x *= 100
+
+            return
+                Math.floor(x)
+        }
+
+        ;[1, 2, 3, 4, 5].map(fooMetPuntKommas)
+        [1, 2, 3, 4, 5].map(fooZonderPuntKommas)
+    </script>
+</body>
+</html>

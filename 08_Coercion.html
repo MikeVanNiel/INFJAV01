@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Coercion</title>
+</head>
+<body>
+    <h1>Opdracht 8 - NIET AF!</h1>
+
+    <script>
+        console.log(5 == new Number(5)); // true: conversion of object to primitive on the right side
+        console.log(new Number(5) == new Number(5)); // false: two different objects do not have the same memory address
+        console.log(5 === new Number(5)); // false: different types
+        console.log(new Number(5) === new Number(5)); // false: two different objects do not have the same memory address
+        console.log(5 == [5]);
+        console.log(5 === [5]);
+        console.log(0 == false);
+        console.log(1 == true);
+        console.log(2 == true);
+        console.log('' == false);
+        console.log('0' == false);
+        console.log('' ? true : false);
+        console.log('0' ? true : false);
+        console.log(false == null);
+        console.log(false == undefined);
+        console.log(null == undefined);
+    </script>
+</body>
+</html>

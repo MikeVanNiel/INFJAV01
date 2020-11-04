@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expressie</title>
+</head>
+<body>
+    <h1>Opdracht 10 - Niet af</h1>
+
+    <script>
+        const teller = function(baseValue) {
+          return {
+              value: baseValue,
+              step: 0,
+              metStapGrootte: function(stapGrootte) {
+                this.step = stapGrootte;
+                return this;
+              },
+              volgende: function() {
+                this.value += this.step;
+                return this.value;
+              }
+          }
+      }
+ 
+      const T = teller(5).metStapGrootte(2);
+
+      console.log(T.volgende()); // 7
+      console.log(T.volgende()); // 9
+      console.log(T.volgende()); //11
+    </script>
+</body>
+</html>
