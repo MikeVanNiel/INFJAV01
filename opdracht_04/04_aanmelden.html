@@ -6,17 +6,17 @@
     <link rel="stylesheet" href="04_style.css">
 </head>
 <body>
-    <nav style="padding:3px 10px;background-color:#333;overflow:hidden;height:40px">
-        <h1 style="float:left;font-weight:300;color:lightgray;margin:10px 20px 5px 5px">Quintor</h1>
-        <ul style="list-style-type:none;">
-            <li style="float:left;margin-right:15px">
-                <a href="01_index.html" style="color:#ccc;text-decoration:none">
+    <nav>
+        <h1>Quintor</h1>
+        <ul>
+            <li>
+                <a href="01_index.html">
                     <i class="fa fa-home"></i>
                     home
                 </a>
             </li>
-            <li style="float:left">
-                <a style="color:#ccc;text-decoration:none">
+            <li>
+                <a href="#">
                     <i class="fa fa-money"></i>
                     aanmelden
                 </a>
@@ -24,30 +24,30 @@
         </ul>
     </nav>
         
-    <div style="display:flex">
-        <div style="flex:1;width:33%"></div>
-        <div style="flex:1;width:33%;text-align:center">
+    <div class="container-flex">
+        <div class="col33"></div>
+        <div class="col33 text-center">
             <header>
-                <h1 style="font-weight:400;font-size:3em;margin:5px 0">Quintor Bank</h1>
+                <h1>Quintor Bank</h1>
             </header>
-            <div style="text-align:left;margin-top:10px;padding:10px;border:1px solid #ccc;background-color:#eee;border-top-left-radius:3px;border-top-right-radius:3px;">
+            <div class="block-header">
                 Meld je aan
             </div>
-            <div style="padding:10px;border:1px solid #ccc;margin-top:-1px;border-bottom-left-radius:3px;border-bottom-right-radius:3px;">
+            <div class="block-content">
                 <form action="02_KlantGegevens.html" method="POST">
-                    <div style="margin:10px;border:1px solid #ccc;border-radius:3px;">
-                        <input type="text" style="box-sizing:border-box;border:none;padding:5px;display:block;width:100%">
+                    <div>
+                        <input type="text" class="w100">
                     </div>
-                    <div style="margin:10px;border:1px solid #ccc;border-radius:3px;">
-                        <input type="password" style="box-sizing:border-box;border:none;padding:5px;display:block;width:100%">
+                    <div>
+                        <input type="password" class="w100">
                     </div>
-                    <div style="margin:10px">
-                        <input type="submit" value="Aanmelden" style="border:none;border-radius:3px;width:100%;padding:10px;color:#fff;background-color:rgb(0,123,255)">
+                    <div>
+                        <input type="submit" value="Aanmelden" class="w100">
                     </div>
                 </form>
             </div>
         </div>
-        <div style="flex:1;width:33%"></div>
+        <div class="col33"></div>
     </div>
 </body>
 </html>

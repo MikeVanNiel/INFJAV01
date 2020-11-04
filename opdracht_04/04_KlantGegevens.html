@@ -6,97 +6,88 @@
     <link rel="stylesheet" href="04_style.css">
 </head>
 <body>
-    <nav style="padding:3px 10px;background-color:#333;overflow:hidden;height:40px">
-        <h1 style="float:left;font-weight:300;color:lightgray;margin:10px 20px 5px 5px">Quintor</h1>
-        <ul style="list-style-type:none;">
-            <li style="float:left;margin-right:15px">
-                <a href="01_index.html" style="color:#ccc;text-decoration:none">
+    <nav>
+        <h1>Quintor</h1>
+        <ul>
+            <li>
+                <a href="01_index.html">
                     <i class="fa fa-home"></i>
                     home
                 </a>
             </li>
-            <li style="float:left;margin-right:15px">
-                <a href="#" style="color:#ccc;text-decoration:none">
+            <li>
+                <a href="#">
                     <i class="fa fa-user"></i>
                     klantgegevens
                 </a>
             </li>
-            <li style="float:left;margin-right:15px">
-                <a href="#" style="color:#ccc;text-decoration:none">
+            <li>
+                <a href="#">
                     <i class="fa fa-list"></i>
                     rekeningoverzicht
                 </a>
             </li>
-            <li style="float:left;margin-right:15px">
-                <a href="#" style="color:#ccc;text-decoration:none">
+            <li>
+                <a href="#">
                     <i class="fa fa-money"></i>
                     overboeking
                 </a>
             </li>
         </ul>
-        <button style="float:right;padding:8px 15px;color:#eee;background-color:#999;border:none;border-radius:3px;margin-top:-6px">
+        <button>
             Log gebruiker1 (123456) uit
         </button>
     </nav>
-    <div style="padding:0 15px">
-        <div style="text-align:left;margin-top:10px;padding:10px;border:1px solid #ccc;background-color:#eee;border-top-left-radius:3px;border-top-right-radius:3px;">
+    <div class="container-wide">
+        <div class="block-header">
             Gegevens voor
         </div>
-        <div style="padding:10px;border:1px solid #ccc;margin-top:-1px;border-bottom-left-radius:3px;border-bottom-right-radius:3px;">
-            <h2 style="font-weight:300;padding-left:10px">Klantgegevens</h2>
+        <div class="block-content">
+            <h2>Klantgegevens</h2>
             <form action="#" method="POST">
-                <div style="margin:10px">
-                    <label for="txtVoorletters" style="display:inline-block;width:100px;color:#666">Voorletters</label>
-                    <input id="txtVoorletters" type="text" required
-                        style="box-sizing:border-box;border:1px solid #ccc;color:#888;border-radius:3px;padding:5px;display:inline-block;width:150px">
+                <div>
+                    <label for="txtVoorletters">Voorletters</label>
+                    <input id="txtVoorletters" type="text" class="w150" required>
                 </div>
-                <div style="margin:10px">
-                    <label for="txtAchternaam" style="display:inline-block;width:100px;color:#666">Achternaam</label>
-                    <input id="txtAchternaam" type="text" required
-                        style="box-sizing:border-box;border:1px solid #ccc;color:#888;border-radius:3px;padding:5px;display:inline-block;width:300px">
+                <div>
+                    <label for="txtAchternaam">Achternaam</label>
+                    <input id="txtAchternaam" type="text" class="w300" required>
                 </div>
-                <div style="margin:10px">
-                    <label for="txtStraat" style="display:inline-block;width:100px;color:#666">Straat</label>
-                    <input id="txtStraat" type="text" required
-                        style="box-sizing:border-box;border:1px solid #ccc;color:#888;border-radius:3px;padding:5px;display:inline-block;width:300px">
+                <div>
+                    <label for="txtStraat">Straat</label>
+                    <input id="txtStraat" type="text" class="w300" required>
                 </div>
-                <div style="margin:10px">
-                    <label for="txtHuisnummer" style="display:inline-block;width:100px;color:#666">Huisnummer</label>
-                    <input id="txtHuisnummer" type="text" required
-                        style="box-sizing:border-box;border:1px solid #ccc;color:#888;border-radius:3px;padding:5px;display:inline-block;width:150px">
+                <div>
+                    <label for="txtHuisnummer">Huisnummer</label>
+                    <input id="txtHuisnummer" type="text" class="w150" required>
                 </div>
-                <div style="margin:10px">
-                    <label for="txtPlaats" style="display:inline-block;width:100px;color:#666">Plaats</label>
-                    <input id="txtPlaats" type="text" required
-                        style="box-sizing:border-box;border:1px solid #ccc;color:#888;border-radius:3px;padding:5px;display:inline-block;width:300px">
+                <div>
+                    <label for="txtPlaats">Plaats</label>
+                    <input id="txtPlaats" type="text" class="w300" required>
                 </div>
-                <div style="margin:10px">
-                    <label for="txtPostcode" style="display:inline-block;width:100px;color:#666">Postcode</label>
-                    <input id="txtPostcode" type="text" required maxlength="7" pattern="^[1-9][0-9]{3} ?[A-Z]{2}$"
-                        style="box-sizing:border-box;border:1px solid #ccc;color:#888;border-radius:3px;padding:5px;display:inline-block;width:150px">
+                <div>
+                    <label for="txtPostcode">Postcode</label>
+                    <input id="txtPostcode" type="text" class="w150" maxlength="7" pattern="^[1-9][0-9]{3} ?[A-Z]{2}$" required>
                 </div>
-                <div style="margin:10px">
-                    <label for="txtBSN" style="display:inline-block;width:100px;color:#666">BSN</label>
-                    <input id="txtBSN" type="text" required minlength="9" maxlength="9" pattern="^[0-9]*$"
-                        style="box-sizing:border-box;border:1px solid #ccc;color:#888;border-radius:3px;padding:5px;display:inline-block;width:150px">
+                <div>
+                    <label for="txtBSN">BSN</label>
+                    <input id="txtBSN" type="text" class="w150" minlength="9" maxlength="9" pattern="^[0-9]*$" required>
                 </div>
-                <div style="margin:10px">
-                    <label for="txtGeboortedatum" style="display:inline-block;width:100px;color:#666">Geboortedatum</label>
-                    <input id="txtGeboortedatum" type="date" required
-                        style="box-sizing:border-box;border:1px solid #ccc;color:#888;border-radius:3px;padding:5px;display:inline-block;width:150px">
+                <div>
+                    <label for="txtGeboortedatum">Geboortedatum</label>
+                    <input id="txtGeboortedatum" type="date" class="w150" required>
                 </div>
-                <div style="margin:10px">
-                    <label for="txtTelefoon" style="display:inline-block;width:100px;color:#666">Telefoon</label>
-                    <input id="txtTelefoon" type="text" required pattern="^((\+|00(\s|\s?\-\s?)?)31(\s|\s?\-\s?)?(\(0\)[\-\s]?)?|0)[1-9]((\s|\s?\-\s?)?[0-9])((\s|\s?-\s?)?[0-9])((\s|\s?-\s?)?[0-9])\s?[0-9]\s?[0-9]\s?[0-9]\s?[0-9]\s?[0-9]$"
-                        style="box-sizing:border-box;border:1px solid #ccc;color:#888;border-radius:3px;padding:5px;display:inline-block;width:150px">
+                <div>
+                    <label for="txtTelefoon">Telefoon</label>
+                    <input id="txtTelefoon" type="text" class="w150" required 
+                        pattern="^((\+|00(\s|\s?\-\s?)?)31(\s|\s?\-\s?)?(\(0\)[\-\s]?)?|0)[1-9]((\s|\s?\-\s?)?[0-9])((\s|\s?-\s?)?[0-9])((\s|\s?-\s?)?[0-9])\s?[0-9]\s?[0-9]\s?[0-9]\s?[0-9]\s?[0-9]$">
                 </div>
-                <div style="margin:10px">
-                    <label for="txtEmail" style="display:inline-block;width:100px;color:#666">E-mailadres</label>
-                    <input id="txtEmail" type="text" required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                        style="box-sizing:border-box;border:1px solid #ccc;color:#888;border-radius:3px;padding:5px;display:inline-block;width:300px">
+                <div>
+                    <label for="txtEmail">E-mailadres</label>
+                    <input id="txtEmail" type="text" class="w300" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
                 </div>
-                <div style="margin:10px">
-                    <input type="submit" value="Opslaan" style="border:none;border-radius:3px;padding:8px 15px;color:#fff;background-color:rgb(0,123,255)">
+                <div>
+                    <input type="submit" value="Opslaan">
                 </div>
             </form>
         </div>
