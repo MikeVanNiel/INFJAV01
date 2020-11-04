@@ -1,7 +1,7 @@
-import { Hond } from './Hond';
-import { Kat } from './Kat';
+import Hond from './Hond.js';
+import Kat from './Kat.js';
 
-const fikkie = new Hond('Fikkie', 4);
+const fikkie = new Hond('Fikkie', 3);
 const minoes = new Kat('Minoes', 4);
 
 console.log('Hond naam: ' + fikkie.getNaam());
