@@ -7,26 +7,54 @@
     <h1>Opdracht 10 - Niet af</h1>
 
     <script>
-        const teller = function(baseValue) {
-          return {
-              value: baseValue,
-              step: 0,
-              metStapGrootte: function(stapGrootte) {
-                this.step = stapGrootte;
-                return this;
-              },
-              volgende: function() {
-                this.value += this.step;
-                return this.value;
-              }
-          }
-      }
- 
-      const T = teller(5).metStapGrootte(2);
+      // Je loopt tegen het probleem van de context van this.
 
+
+      // Deze oplossing werkt in ieder geval!
+      const teller = function(baseValue) {
+        return {
+            value: baseValue,
+            step: 0,
+            metStapGrootte: function(stapGrootte) {
+              this.step = stapGrootte;
+              return this;
+            },
+            volgende: function() {
+              this.value += this.step;
+              return this.value;
+            }
+        }
+      }
+
+      const T = teller(5).metStapGrootte(2);
       console.log(T.volgende()); // 7
       console.log(T.volgende()); // 9
       console.log(T.volgende()); //11
+
+
+      // Poging tot het gebruik van de bind functie
+      const tellerBound = function(baseValue) {
+        value: 0;
+        step: 0;
+        return {
+          metStapGrootte: function(stapGrootte) {
+            this.value = baseValue;
+            this.step = stapGrootte;
+            return {
+              volgende: function() {
+                this.value += this.step;
+                return this.value;
+              }.bind(tellerBound)
+            }
+          }.bind(tellerBound)
+        }
+      }
+
+      const Tbound= tellerBound(5).metStapGrootte(2);
+
+      console.log(Tbound.volgende()); // 7
+      console.log(Tbound.volgende()); // 9
+      console.log(Tbound.volgende()); //11
     </script>
 </body>
 </html>
