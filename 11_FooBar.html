@@ -4,18 +4,86 @@
     <title>FooBar</title>
 </head>
 <body>
-    <h1>Opdracht 11 - NIET AF</h1>
+    <h1>Opdracht 11</h1>
 
     <script>
-      let foo = {};
-      
+
+      let foo = function () { };
       let bar = new foo();
 
+      // Property prop1 toevoegen aan foo
+      // --------------------------------
+      // 1. Via prototype: foo geen direct prop1, bar wel via proto object
+      foo.prototype.prop1 = 'foo_prop1_proto';
+      // 2. Rechtstreeks op foo: alleen foo heeft prop1
+      foo.prop1 = 'foo_prop1';
+      // Resultaat:
+      console.log('1. foo.prop1          : ' + foo.prop1);           // 'foo_prop1'
+      console.log('1. foo.prototype.prop1: ' + foo.prototype.prop1); // 'foo_prop1_proto'
+      console.log('1. bar.prop1          : ' + bar.prop1);           // 'foo_prop1_proto'
+      console.log('1. bar.__proto__.prop1: ' + bar.__proto__.prop1); // 'foo_prop1_proto'
+      console.log('');
+
+      // Property prop2 toevoegen aan bar
+      // --------------------------------
+      // 1. Via prototype: alleen bar heeft prop2, maar via prototype object ook foo
+      bar.__proto__.prop2 = 'bar_prop2_proto';
+      // 2. Rechtstreeks op bar: alleen bar heeft prop2
+      bar.prop2 = 'bar_prop2';
+      // Resultaat:
+      console.log('2. foo.prop2          : ' + foo.prop2);           // undefined
+      console.log('2. foo.prototype.prop2: ' + foo.prototype.prop2); // 'bar_prop2_proto'
+      console.log('2. bar.prop2          : ' + bar.prop2);           // 'bar_prop2'
+      console.log('2. bar.__proto__.prop2: ' + bar.__proto__.prop2); // 'bar_prop2_proto'
+      console.log('');
+
+      // Property prop1 aan bar toevoegen
+      // --------------------------------
+      // 1. Via prototype: 
+      bar.__proto__.prop1 = 'bar_prop1_proto';
+      // 2. Rechtstreeks op bar:
+      bar.prop1 = 'bar_prop1';
+      // Resultaat:
+      console.log('3. foo.prop1          : ' + foo.prop1);           // 'foo_prop1'
+      console.log('3. foo.prototype.prop1: ' + foo.prototype.prop1); // 'bar_prop1_proto'
+      console.log('3. bar.prop1          : ' + bar.prop1);           // 'bar_prop1'
+      console.log('3. bar.__proto__.prop1: ' + bar.__proto__.prop1); // 'bar_prop1_proto'
+      console.log('');
+
+      // Property prop2 aan foo toevoegen
+      // --------------------------------
+      // 1. Via prototype: 
+      foo.prototype.prop2 = 'foo_prop2_proto';
+      // 2. Rechtstreeks op foo:
+      foo.prop2 = 'foo_prop2';
+      // Resultaat:
+      console.log('4. foo.prop2          : ' + foo.prop2);           // 'foo_prop2'
+      console.log('4. foo.prototype.prop2: ' + foo.prototype.prop2); // 'foo_prop2_proto'
+      console.log('4. bar.prop2          : ' + bar.prop2);           // 'bar_prop2'
+      console.log('4. bar.__proto__.prop2: ' + bar.__proto__.prop2); // 'foo_prop2_proto'
+      console.log('');
+
+      // In JavaScript helpt het prototype object om OO-programming principes toe te voegen.
+      // Bij het aanmaken van een functie voegt de JavaScript-engine een prototype property toe.
+      // Dit prototype property is een object met een constructor property die verwijst naar de functie.
+      // Omdat het een object is, kun je er nieuwe properties aan toevoegen.
+
+      // Als een object wordt aangemaakt op basis van de functie voegt de JavaScript engine
+      // een property __proto__ toe: een dunder proto, die verwijst naar het prototype object van de functie.
+
+      // Zowel foo als bar zien dus alle wijzigingen die via dat prototype object worden aangebracht
+      // omdat ze naar hetzelfde object verwijzen.
+
+      // Zowel foo als bar zijn op zichzelf ook weer objecten waaraan je properties kunt toevoegen.
+      // Als je een property opvraagt van een object, probeert de JavaScript engine eerst 
+      // dit property te vinden op het object zelf, daarna in het __proto__ object.
+
+
+      console.log('foo: ' + JSON.stringify(foo));
       console.log(foo);
+      console.log('bar: ' + JSON.stringify(bar));
       console.log(bar);
-      
- 
-      
+           
     </script>
 </body>
 </html>

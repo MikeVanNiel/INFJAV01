@@ -4,25 +4,29 @@
     <title>Coercion</title>
 </head>
 <body>
-    <h1>Opdracht 8 - NIET AF!</h1>
+    <h1>Opdracht 8</h1>
 
     <script>
-        console.log(5 == new Number(5)); // true: conversion of object to primitive on the right side
-        console.log(new Number(5) == new Number(5)); // false: two different objects do not have the same memory address
-        console.log(5 === new Number(5)); // false: different types
-        console.log(new Number(5) === new Number(5)); // false: two different objects do not have the same memory address
-        console.log(5 == [5]);
-        console.log(5 === [5]);
-        console.log(0 == false);
-        console.log(1 == true);
-        console.log(2 == true);
-        console.log('' == false);
-        console.log('0' == false);
-        console.log('' ? true : false);
-        console.log('0' ? true : false);
-        console.log(false == null);
-        console.log(false == undefined);
-        console.log(null == undefined);
+        // implicit type coercions
+        // -----------------------
+        // 1. Er zijn slechts drie type conversies in JS: to string, to boolean, to number.
+        // 2. Conversie van primitives en objecten werkt anders maar regel 1 is van toepassing hierop.
+        console.log(5 == new Number(5));              // true:       impliciete conversie -> new Number(5) wordt geconverteerd naar een primitive number met valueOf()
+        console.log(new Number(5) == new Number(5));  // false:      impliciete conversie -> objecten worden vergeleken op referentie adres
+        console.log(5 === new Number(5));             // false: geen impliciete conversie -> een primitive is niet gelijk aan een object
+        console.log(new Number(5) === new Number(5)); // false: geen impliciete conversie -> twee verschillende objecten hebben een ander referentie adres op de heap
+        console.log(5 == [5]);                        // true :      impliciete conversie -> impliciete numerieke conversie met [5].valueOf()
+        console.log(5 === [5]);                       // false: geen impliciete conversie -> types komen niet overeen: primitive versus object
+        console.log(0 == false);                      // true :      impliciete conversie -> boolean conversie, 0 wordt geconverteerd naar false, of false naar 0
+        console.log(1 == true);                       // true :      impliciete conversie -> boolean conversie, 1 wordt geconverteerd naar true, of true naar 1
+        console.log(2 == true);                       // false:      impliciete conversie -> ik had TRUE verwacht omdat 2 een truthy value is, maar conversie naar nummer: 2 != 1
+        console.log('' == false);                     // true :      impliciete conversie -> '' wordt geconverteerd naar false (lege string heeft falsy waarde)
+        console.log('0' == false);                    // true :      impliciete conversie -> IK HAD HIER FALSE VERWACHT OMDAT '0' EEN TRUTHY VALUE HEEFT maar waarschijnlijk wordt '0' geconverteerd naar de boolean FALSE
+        console.log('' ? true : false);               // false:      impliciete conversie -> van een lege string naar false   -> falsy waarde
+        console.log('0' ? true : false);              // true :      impliciete conversie -> van een gevulde string naar true -> truthy waarde
+        console.log(false == null);                   // false:      impliciete conversie -> IK HAD HIER TRUE VERWACHT OMDAT null      EEN FALSY WAARDE HEEFT maar waarschijnlijk wordt naar string geconverteerd 'false' != 'undefined'
+        console.log(false == undefined);              // false:      impliciete conversie -> IK HAD HIER TRUE VERWACHT OMDAT undefined EEN FALSY WAARDE HEEFT
+        console.log(null == undefined);               // true :      impliciete conversie -> waarschijnlijk naar boolean waarbij zowel null als undefined een falsy waarde hebben
     </script>
 </body>
 </html>
