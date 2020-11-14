@@ -29,4 +29,16 @@ export class CustomerService {
 
     return targetCustomer;
   }
+
+  save(customer: Customer): void {
+    if (customer) {
+      for (let i = 0; i < this.customers.length; i++) {
+        if (this.customers[i].id === customer.id) {
+          this.customers[i] = customer;
+          break;
+        }
+      }
+    }
+    
+  }
 }
