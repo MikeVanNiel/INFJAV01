@@ -1,0 +1,25 @@
+<div class="container-flex">
+    <div class="col33"></div>
+    <div class="col33 text-center">
+        <header>
+            <h1>Quintor Bank</h1>
+        </header>
+        <div class="block-header">
+            Meld je aan
+        </div>
+        <div class="block-content">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div>
+                    <input type="text" formControlName="username" class="w100" placeholder="gebruikersnaam">
+                </div>
+                <div>
+                    <input type="password" formControlName="password" class="w100" placeholder="wachtwoord">
+                </div>
+                <div>
+                    <input type="submit" value="Aanmelden" class="w100">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col33"></div>
+</div>
