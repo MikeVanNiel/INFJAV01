@@ -9,20 +9,22 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent implements OnInit {
-  currentUser: User;
+
+  public user: User;
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService) { }
+    private authService: AuthenticationService) { }
 
   ngOnInit(): void {
-    // this.authenticationService.currentUser
-    //  .subscribe(x => this.currentUser = x);
+    this.authService.currentUser.subscribe(currentuser =>
+      this.user = currentuser
+    );
   }
 
   logout() {
-    this.authenticationService.logout();
+    this.authService.logout();
     this.router.navigate(['/login']);
-}
+  }
 
 }

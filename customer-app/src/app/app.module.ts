@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
+import { registerLocaleData } from '@angular/common';
+import localeNl from '@angular/common/locales/nl';
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './components/general/toolbar/toolbar.component';
@@ -9,6 +11,8 @@ import { LoginComponent } from './components/login/login.component';
 import { DetailsComponent } from './components/customer/details/details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from './services/authentication.service';
+
+registerLocaleData(localeNl);
 
 @NgModule({
   declarations: [
@@ -24,7 +28,10 @@ import { AuthenticationService } from './services/authentication.service';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [AuthenticationService],
+  providers: [
+    AuthenticationService,
+    { provide: LOCALE_ID, useValue: "nl-NL" }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

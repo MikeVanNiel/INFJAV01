@@ -7,32 +7,32 @@
                 home
             </a>
         </li>
-        <li *ngIf="!currentUser">
+        <li *ngIf="!user">
             <a routerLink="/login">
                 <i class="fa fa-money"></i>
                 aanmelden
             </a>
         </li>
-        <li *ngIf="currentUser">
+        <li *ngIf="user">
             <a routerLink="/customer/details">
                 <i class="fa fa-user"></i>
                 klantgegevens
             </a>
         </li>
-        <li *ngIf="currentUser">
+        <li *ngIf="user">
             <a href="#">
                 <i class="fa fa-list"></i>
                 rekeningoverzicht
             </a>
         </li>
-        <li *ngIf="currentUser">
+        <li *ngIf="user">
             <a href="#">
                 <i class="fa fa-money"></i>
                 overboeking
             </a>
         </li>
     </ul>
-    <button *ngIf="currentUser">
-        Log gebruiker1 (123456) uit
+    <button *ngIf="user" (click)="logout()">
+        Log {{ user.firstName }} uit
     </button>
 </nav>
