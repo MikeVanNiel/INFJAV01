@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
       this.user = currentuser;
       if (!this.user) {
         this.user = { 
+          customerId:0,
           username: '',
           password: '',
           firstName: '',

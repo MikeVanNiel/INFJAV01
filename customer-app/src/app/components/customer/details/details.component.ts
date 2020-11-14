@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Customer } from 'src/app/models/customer';
+import { User } from 'src/app/models/user';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { CustomerService } from 'src/app/services/customer.service';
 
 @Component({
   selector: 'app-details',
@@ -7,9 +11,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailsComponent implements OnInit {
 
-  constructor() { }
+  public cust: Customer;
+
+  constructor(
+    private authService: AuthenticationService, 
+    private custService: CustomerService) { }
 
   ngOnInit(): void {
+    this.authService.currentUser.subscribe(currentuser => {
+      this.cust = this.custService.findById(currentuser.customerId);
+    });
   }
 
 }
