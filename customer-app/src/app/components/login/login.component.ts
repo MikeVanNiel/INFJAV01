@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private dialog: MatDialog
   ) { 
     this.loginForm = this.formBuilder.group({
       username: '',
@@ -46,9 +48,23 @@ export class LoginComponent implements OnInit {
         },
         error => {
           console.log('Login error: ' + error);
-            // this.alertService.error(error);
-            // this.loading = false;
+          this.openDialog(error, 'Fout bij inloggen')
         }
       );
-    }
   }
+
+  openDialog(msg: string, title: string): void {
+    this.dialog.open(LoginComponent, {
+      data: {
+        title: title || 'Let op',
+        message: msg,
+        information: '',
+        button: 0,
+        style: 0,
+        allow_outside_click: true
+      }
+    });
+  }
+
+
+}

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { User } from '../models/user';
 
 
@@ -31,17 +31,22 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string): Observable<User> {
-    console.log('login: ' + username)
+    const errorMsg = 'User not found or incorrect password.';
     let targetUser: User = 
-      this.users.filter(user => user.username === username && user.password === password)[0];
-    console.log('found user: ' + JSON.stringify(targetUser));
+      this.users.filter(user => user.username === username)[0];
+
     if (targetUser) {
-      console.log('user found');
-      localStorage.setItem('currentUser', JSON.stringify(targetUser));
-      this.currentUserSubject.next(targetUser);
-      return of(targetUser);
+      if (targetUser.password === password) {
+        localStorage.setItem('currentUser', JSON.stringify(targetUser));
+        this.currentUserSubject.next(targetUser);
+        return of(targetUser);
+      } else {
+        console.log('incorrect password');
+        throwError(errorMsg);
+      }
     } else {
-      console.log('no user to return?');
+      console.log('no user found with given username: ' + username);
+      throwError(errorMsg);
     }
   }
 

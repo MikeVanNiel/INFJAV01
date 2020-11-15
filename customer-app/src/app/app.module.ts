@@ -3,6 +3,8 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { registerLocaleData } from '@angular/common';
 import localeNl from '@angular/common/locales/nl';
+import { MatDialogModule } from '@angular/material';
+
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './components/general/toolbar/toolbar.component';
@@ -12,6 +14,7 @@ import { DetailsComponent } from './components/customer/details/details.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from './services/authentication.service';
 import { ListComponent } from './components/customer/list/list.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 registerLocaleData(localeNl);
 
@@ -28,7 +31,9 @@ registerLocaleData(localeNl);
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthenticationService,

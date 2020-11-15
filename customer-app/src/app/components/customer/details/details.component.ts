@@ -56,6 +56,7 @@ export class DetailsComponent implements OnInit {
     };
     console.log('save customer: ' + JSON.stringify(customer));
     this.custService.save(customer);
+    this.cust = customer;
   }
 
 }
