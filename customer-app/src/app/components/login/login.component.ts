@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { User } from 'src/app/models/user';
 import { NotificationService } from 'src/app/services/notification.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,8 @@ import { NotificationService } from 'src/app/services/notification.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  public loginForm: FormGroup;
+  pageTitle: string = environment.title;
+  loginForm: FormGroup;
   submitted = false;
   returnUrl: string;
   alertService: any;

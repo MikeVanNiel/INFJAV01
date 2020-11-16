@@ -32,7 +32,9 @@ registerLocaleData(localeNl);
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({
+      positionClass :'toast-bottom-right'
+    })
   ],
   exports: [
     ReactiveFormsModule

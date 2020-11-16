@@ -13,4 +13,15 @@ describe('AuthenticationService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should login user succesfully', () => {
+    let username = 'mike';
+    let password = 'mike';
+    service.login(username, password).subscribe(
+      response => {
+        expect(response.status).toBe(200);
+      }
+    );
+    
+  })
 });
