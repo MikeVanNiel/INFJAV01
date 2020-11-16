@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { MatDialog } from '@angular/material';
 import { User } from 'src/app/models/user';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private formBuilder: FormBuilder,
-    private dialog: MatDialog
+    private notifyService: NotificationService
   ) { 
     this.loginForm = this.formBuilder.group({
       username: '',
@@ -48,30 +48,21 @@ export class LoginComponent implements OnInit {
   loginUser(username: string, password: string) {
     this.authenticationService.login(username, password)
       .subscribe(
-        data => {
-            console.log('Logged in!');
-            this.user = data;
+        response => {
+          if (response.status === 200) {
+            console.log('Succesvol aangemeld.');
+            this.user = response.user;
+            this.notifyService.showSuccess('Succesvol aangemeld.', 'Aanmelden');
             this.router.navigate([this.returnUrl]);
+          } else {
+            console.log('Fout bij aanmelden.');
+            this.notifyService.showError('Gebruikersnaam of wachtwoord onjuist', 'Fout bij aanmelden');
+          }
         },
         error => {
           console.log('Login error: ' + error);
-          this.openDialog(error, 'Fout bij inloggen')
+          this.notifyService.showError(error, 'Fout bij aanmelden');
         }
       );
   }
-
-  openDialog(msg: string, title?: string): void {
-    this.dialog.open(LoginComponent, {
-      data: {
-        title: title || 'Let op',
-        message: msg,
-        information: '',
-        button: 0,
-        style: 0,
-        allow_outside_click: true
-      }
-    });
-  }
-
-
 }

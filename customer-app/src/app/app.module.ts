@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { registerLocaleData } from '@angular/common';
 import localeNl from '@angular/common/locales/nl';
-import { MatDialogModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './components/general/toolbar/toolbar.component';
@@ -12,8 +13,8 @@ import { LoginComponent } from './components/login/login.component';
 import { DetailsComponent } from './components/customer/details/details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from './services/authentication.service';
-import { ListComponent } from './components/customer/list/list.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CustomerService } from './services/customer.service';
+import { NotificationService } from './services/notification.service';
 
 registerLocaleData(localeNl);
 
@@ -23,22 +24,23 @@ registerLocaleData(localeNl);
     ToolbarComponent,
     HomeComponent,
     LoginComponent,
-    DetailsComponent,
-    ListComponent
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   exports: [
     ReactiveFormsModule
   ],
   providers: [
     AuthenticationService,
+    CustomerService,
+    NotificationService,
     { provide: LOCALE_ID, useValue: "nl-NL" }
   ],
   bootstrap: [AppComponent]
