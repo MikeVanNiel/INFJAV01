@@ -5,7 +5,6 @@ import { registerLocaleData } from '@angular/common';
 import localeNl from '@angular/common/locales/nl';
 import { MatDialogModule } from '@angular/material';
 
-
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './components/general/toolbar/toolbar.component';
 import { HomeComponent } from './components/home/home.component';
@@ -34,6 +33,9 @@ registerLocaleData(localeNl);
     ReactiveFormsModule,
     MatDialogModule,
     BrowserAnimationsModule
+  ],
+  exports: [
+    ReactiveFormsModule
   ],
   providers: [
     AuthenticationService,
